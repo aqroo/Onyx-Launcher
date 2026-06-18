@@ -1,0 +1,144 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Onyx Launcher</title>
+<style>
+  :root {
+    --bg: #1b1b1b;
+    --panel: #242424;
+    --text: #e2e2e2;
+    --muted: #9a9a9a;
+    --accent: #0099cc;
+  }
+  * { box-sizing: border-box; }
+  body {
+    margin: 0;
+    background: var(--bg);
+    color: var(--text);
+    font-family: "Segoe UI", "Hiragino Sans", "Yu Gothic", sans-serif;
+  }
+  header {
+    padding: 64px 24px 40px;
+    text-align: center;
+  }
+  .logo {
+    width: 64px;
+    height: 64px;
+    margin: 0 auto 16px;
+    border-radius: 14px;
+    background: var(--accent);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 28px;
+    font-weight: 700;
+    color: white;
+  }
+  h1 {
+    margin: 0;
+    font-size: 32px;
+  }
+  p.tagline {
+    color: var(--muted);
+    margin-top: 8px;
+  }
+  .download-btn {
+    display: inline-block;
+    margin-top: 24px;
+    padding: 14px 32px;
+    background: var(--accent);
+    color: white;
+    text-decoration: none;
+    border-radius: 8px;
+    font-weight: 600;
+    font-size: 16px;
+  }
+  .download-btn:hover {
+    opacity: 0.9;
+  }
+  main {
+    max-width: 760px;
+    margin: 0 auto;
+    padding: 0 24px 64px;
+  }
+  .features {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+    gap: 16px;
+    margin-top: 32px;
+  }
+  .feature {
+    background: var(--panel);
+    border-radius: 8px;
+    padding: 20px;
+  }
+  .feature h3 {
+    margin: 0 0 8px;
+    font-size: 16px;
+    color: var(--accent);
+  }
+  .feature p {
+    margin: 0;
+    color: var(--muted);
+    font-size: 14px;
+    line-height: 1.6;
+  }
+  .note {
+    margin-top: 40px;
+    padding: 16px 20px;
+    background: var(--panel);
+    border-left: 3px solid var(--accent);
+    border-radius: 4px;
+    font-size: 14px;
+    color: var(--muted);
+  }
+  footer {
+    text-align: center;
+    color: var(--muted);
+    font-size: 13px;
+    padding: 24px;
+  }
+  footer a {
+    color: var(--accent);
+  }
+</style>
+</head>
+<body>
+  <header>
+    <div class="logo">O</div>
+    <h1>Onyx Launcher</h1>
+    <p class="tagline">自分と友達のための、小さなMinecraft用ランチャー</p>
+    <a class="download-btn" href="https://github.com/aqroo/Onyx-Launcher/releases/latest">
+      最新版をダウンロード
+    </a>
+  </header>
+
+  <main>
+    <div class="features">
+      <div class="feature">
+        <h3>バニラ / Forge / Fabric</h3>
+        <p>構成ごとにMODローダーを選んで、バージョンも一覧から選べます。</p>
+      </div>
+      <div class="feature">
+        <h3>Modrinth連携</h3>
+        <p>MODの検索・導入・依存MODの自動解決まで画面内で完結します。</p>
+      </div>
+      <div class="feature">
+        <h3>構成の共有</h3>
+        <p>作った構成をエクスポートして、友達にそのまま渡せます。</p>
+      </div>
+    </div>
+
+    <div class="note">
+      初回起動時にMicrosoftログインを行うと、本物のスキンで遊べます。WebView2 Runtimeが必要ですが、最近のWindows
+      10/11にはほぼ標準で入っています。
+    </div>
+  </main>
+
+  <footer>
+    <a href="https://github.com/aqroo/Onyx-Launcher">GitHubリポジトリ</a>
+  </footer>
+</body>
+</html>
