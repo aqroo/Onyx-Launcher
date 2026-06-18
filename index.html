@@ -1,144 +1,532 @@
+```html
 <!DOCTYPE html>
 <html lang="ja">
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <title>Onyx Launcher</title>
+
 <style>
-  :root {
-    --bg: #1b1b1b;
-    --panel: #242424;
-    --text: #e2e2e2;
-    --muted: #9a9a9a;
-    --accent: #0099cc;
-  }
-  * { box-sizing: border-box; }
-  body {
-    margin: 0;
-    background: var(--bg);
-    color: var(--text);
-    font-family: "Segoe UI", "Hiragino Sans", "Yu Gothic", sans-serif;
-  }
-  header {
-    padding: 64px 24px 40px;
-    text-align: center;
-  }
-  .logo {
-    width: 64px;
-    height: 64px;
-    margin: 0 auto 16px;
-    border-radius: 14px;
-    background: var(--accent);
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    font-size: 28px;
-    font-weight: 700;
-    color: white;
-  }
-  h1 {
-    margin: 0;
-    font-size: 32px;
-  }
-  p.tagline {
-    color: var(--muted);
-    margin-top: 8px;
-  }
-  .download-btn {
-    display: inline-block;
-    margin-top: 24px;
-    padding: 14px 32px;
-    background: var(--accent);
-    color: white;
-    text-decoration: none;
-    border-radius: 8px;
-    font-weight: 600;
-    font-size: 16px;
-  }
-  .download-btn:hover {
-    opacity: 0.9;
-  }
-  main {
-    max-width: 760px;
-    margin: 0 auto;
-    padding: 0 24px 64px;
-  }
-  .features {
-    display: grid;
-    grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
-    gap: 16px;
-    margin-top: 32px;
-  }
-  .feature {
-    background: var(--panel);
-    border-radius: 8px;
-    padding: 20px;
-  }
-  .feature h3 {
-    margin: 0 0 8px;
-    font-size: 16px;
-    color: var(--accent);
-  }
-  .feature p {
-    margin: 0;
-    color: var(--muted);
-    font-size: 14px;
-    line-height: 1.6;
-  }
-  .note {
-    margin-top: 40px;
-    padding: 16px 20px;
-    background: var(--panel);
-    border-left: 3px solid var(--accent);
-    border-radius: 4px;
-    font-size: 14px;
-    color: var(--muted);
-  }
-  footer {
-    text-align: center;
-    color: var(--muted);
-    font-size: 13px;
-    padding: 24px;
-  }
-  footer a {
-    color: var(--accent);
-  }
+:root{
+    --bg:#070b10;
+    --panel:rgba(255,255,255,.05);
+    --border:rgba(255,255,255,.08);
+    --text:#ffffff;
+    --muted:#9aa6b2;
+    --accent:#00bfff;
+}
+
+*{
+    margin:0;
+    padding:0;
+    box-sizing:border-box;
+}
+
+html{
+    scroll-behavior:smooth;
+}
+
+body{
+    font-family:"Segoe UI","Yu Gothic UI",sans-serif;
+    background:
+        radial-gradient(circle at top,#00384f 0%,#070b10 40%);
+    color:var(--text);
+    overflow-x:hidden;
+}
+
+#bg{
+    position:fixed;
+    inset:0;
+    width:100%;
+    height:100%;
+    z-index:-1;
+}
+
+.container{
+    width:min(1200px,90%);
+    margin:auto;
+}
+
+header{
+    min-height:100vh;
+    display:flex;
+    align-items:center;
+    justify-content:center;
+    text-align:center;
+}
+
+.hero{
+    max-width:900px;
+}
+
+.logo{
+    width:90px;
+    height:90px;
+    margin:auto;
+    border-radius:22px;
+
+    background:linear-gradient(
+        135deg,
+        #00d4ff,
+        #0078ff
+    );
+
+    display:flex;
+    align-items:center;
+    justify-content:center;
+
+    font-size:40px;
+    font-weight:700;
+
+    box-shadow:
+        0 0 50px rgba(0,191,255,.4);
+
+    animation:float 4s ease-in-out infinite;
+}
+
+@keyframes float{
+    0%,100%{
+        transform:translateY(0);
+    }
+    50%{
+        transform:translateY(-10px);
+    }
+}
+
+.hero h1{
+    margin-top:24px;
+    font-size:clamp(3rem,8vw,5rem);
+}
+
+.hero p{
+    margin-top:16px;
+    color:var(--muted);
+    font-size:1.15rem;
+    line-height:1.8;
+}
+
+.buttons{
+    margin-top:36px;
+    display:flex;
+    gap:16px;
+    justify-content:center;
+    flex-wrap:wrap;
+}
+
+.btn{
+    text-decoration:none;
+    color:white;
+    padding:16px 32px;
+    border-radius:14px;
+    font-weight:700;
+    transition:.3s;
+}
+
+.btn-primary{
+    background:linear-gradient(
+        135deg,
+        #00d4ff,
+        #0084ff
+    );
+}
+
+.btn-primary:hover{
+    transform:translateY(-4px);
+    box-shadow:
+        0 0 30px rgba(0,191,255,.5);
+}
+
+.btn-secondary{
+    border:1px solid rgba(255,255,255,.15);
+    background:rgba(255,255,255,.04);
+}
+
+.btn-secondary:hover{
+    background:rgba(255,255,255,.08);
+}
+
+section{
+    padding:120px 0;
+}
+
+.section-title{
+    text-align:center;
+    font-size:2.5rem;
+    margin-bottom:60px;
+}
+
+.features{
+    display:grid;
+    grid-template-columns:repeat(auto-fit,minmax(250px,1fr));
+    gap:24px;
+}
+
+.card{
+    background:var(--panel);
+    border:1px solid var(--border);
+    backdrop-filter:blur(16px);
+    border-radius:22px;
+    padding:28px;
+
+    transition:.3s;
+}
+
+.card:hover{
+    transform:translateY(-8px);
+    box-shadow:
+        0 12px 40px rgba(0,191,255,.15);
+}
+
+.card .icon{
+    font-size:2rem;
+    margin-bottom:16px;
+}
+
+.card h3{
+    margin-bottom:12px;
+}
+
+.card p{
+    color:var(--muted);
+    line-height:1.7;
+}
+
+.screenshot{
+    background:var(--panel);
+    border:1px solid var(--border);
+    border-radius:28px;
+    padding:24px;
+    backdrop-filter:blur(16px);
+}
+
+.mockup{
+    aspect-ratio:16/9;
+    border-radius:18px;
+
+    background:
+        linear-gradient(
+            135deg,
+            #0f1724,
+            #18283d
+        );
+
+    display:flex;
+    align-items:center;
+    justify-content:center;
+
+    color:var(--muted);
+    font-size:1.2rem;
+}
+
+.about{
+    max-width:850px;
+    margin:auto;
+    text-align:center;
+}
+
+.about p{
+    color:var(--muted);
+    line-height:2;
+    font-size:1.1rem;
+}
+
+.download{
+    text-align:center;
+}
+
+.download-box{
+    background:var(--panel);
+    border:1px solid var(--border);
+    backdrop-filter:blur(16px);
+
+    border-radius:28px;
+    padding:60px 30px;
+}
+
+.download-box p{
+    color:var(--muted);
+    margin:20px 0 30px;
+}
+
+footer{
+    padding:40px 0;
+    border-top:1px solid rgba(255,255,255,.08);
+}
+
+.footer-content{
+    display:flex;
+    justify-content:space-between;
+    align-items:center;
+    flex-wrap:wrap;
+    gap:16px;
+}
+
+.footer-content p{
+    color:var(--muted);
+}
+
+.footer-content a{
+    color:var(--accent);
+    text-decoration:none;
+}
+
+.reveal{
+    opacity:0;
+    transform:translateY(30px);
+    transition:.8s;
+}
+
+.reveal.show{
+    opacity:1;
+    transform:none;
+}
+
+@media(max-width:768px){
+
+    .section-title{
+        font-size:2rem;
+    }
+
+    .footer-content{
+        text-align:center;
+        justify-content:center;
+    }
+
+}
 </style>
 </head>
+
 <body>
-  <header>
-    <div class="logo">O</div>
-    <h1>Onyx Launcher</h1>
-    <p class="tagline">自分と友達のための、小さなMinecraft用ランチャー</p>
-    <a class="download-btn" href="https://github.com/aqroo/Onyx-Launcher/releases/latest">
-      最新版をダウンロード
-    </a>
-  </header>
 
-  <main>
-    <div class="features">
-      <div class="feature">
-        <h3>バニラ / Forge / Fabric</h3>
-        <p>構成ごとにMODローダーを選んで、バージョンも一覧から選べます。</p>
-      </div>
-      <div class="feature">
-        <h3>Modrinth連携</h3>
-        <p>MODの検索・導入・依存MODの自動解決まで画面内で完結します。</p>
-      </div>
-      <div class="feature">
-        <h3>構成の共有</h3>
-        <p>作った構成をエクスポートして、友達にそのまま渡せます。</p>
-      </div>
+<canvas id="bg"></canvas>
+
+<header>
+    <div class="hero reveal">
+        <div class="logo">O</div>
+
+        <h1>Onyx Launcher</h1>
+
+        <p>
+            Minecraftの構成管理をもっとシンプルに。<br>
+            Forge・Fabric・Vanillaを統一されたUIで管理できます。
+        </p>
+
+        <div class="buttons">
+            <a class="btn btn-primary"
+               href="https://github.com/aqroo/Onyx-Launcher/releases/latest">
+                最新版をダウンロード
+            </a>
+
+            <a class="btn btn-secondary"
+               href="https://github.com/aqroo/Onyx-Launcher">
+                GitHub
+            </a>
+        </div>
+    </div>
+</header>
+
+<section>
+    <div class="container">
+
+        <h2 class="section-title reveal">
+            Features
+        </h2>
+
+        <div class="features">
+
+            <div class="card reveal">
+                <div class="icon">🚀</div>
+                <h3>Forge / Fabric / Vanilla</h3>
+                <p>
+                    MODローダーやバージョンを簡単に管理。
+                </p>
+            </div>
+
+            <div class="card reveal">
+                <div class="icon">📦</div>
+                <h3>Modrinth Integration</h3>
+                <p>
+                    検索から導入までランチャー内で完結。
+                </p>
+            </div>
+
+            <div class="card reveal">
+                <div class="icon">👥</div>
+                <h3>Configuration Sharing</h3>
+                <p>
+                    構成を友達へそのまま共有できます。
+                </p>
+            </div>
+
+            <div class="card reveal">
+                <div class="icon">🔄</div>
+                <h3>Automatic Updates</h3>
+                <p>
+                    ランチャーを常に最新状態へ保ちます。
+                </p>
+            </div>
+
+        </div>
+
+    </div>
+</section>
+
+<section>
+    <div class="container">
+
+        <h2 class="section-title reveal">
+            Screenshot
+        </h2>
+
+        <div class="screenshot reveal">
+            <div class="mockup">
+                Launcher Screenshot Here
+            </div>
+        </div>
+
+    </div>
+</section>
+
+<section>
+    <div class="container about reveal">
+
+        <h2 class="section-title">
+            About
+        </h2>
+
+        <p>
+            Onyx Launcherは小規模サーバーや友人とのマルチプレイ向けに
+            開発されているMinecraftランチャーです。
+            構成管理・MOD導入・アップデート管理を一つの画面で完結できることを目標としています。
+        </p>
+
+    </div>
+</section>
+
+<section>
+    <div class="container download">
+
+        <div class="download-box reveal">
+
+            <h2>Ready to Play?</h2>
+
+            <p>
+                最新版をダウンロードして今すぐ始めましょう。
+            </p>
+
+            <a class="btn btn-primary"
+               href="https://github.com/aqroo/Onyx-Launcher/releases/latest">
+                Download Now
+            </a>
+
+        </div>
+
+    </div>
+</section>
+
+<footer>
+
+    <div class="container footer-content">
+
+        <p>
+            © 2026 Onyx Launcher
+        </p>
+
+        <a href="https://github.com/aqroo/Onyx-Launcher">
+            GitHub Repository
+        </a>
+
     </div>
 
-    <div class="note">
-      初回起動時にMicrosoftログインを行うと、本物のスキンで遊べます。WebView2 Runtimeが必要ですが、最近のWindows
-      10/11にはほぼ標準で入っています。
-    </div>
-  </main>
+</footer>
 
-  <footer>
-    <a href="https://github.com/aqroo/Onyx-Launcher">GitHubリポジトリ</a>
-  </footer>
+<script>
+const observer = new IntersectionObserver(entries=>{
+    entries.forEach(entry=>{
+        if(entry.isIntersecting){
+            entry.target.classList.add("show");
+        }
+    });
+});
+
+document.querySelectorAll(".reveal").forEach(el=>{
+    observer.observe(el);
+});
+
+const canvas = document.getElementById("bg");
+const ctx = canvas.getContext("2d");
+
+function resize(){
+    canvas.width = innerWidth;
+    canvas.height = innerHeight;
+}
+
+resize();
+addEventListener("resize",resize);
+
+const particles=[];
+
+for(let i=0;i<100;i++){
+    particles.push({
+        x:Math.random()*innerWidth,
+        y:Math.random()*innerHeight,
+        r:Math.random()*2+1,
+        vx:(Math.random()-.5)*0.25,
+        vy:(Math.random()-.5)*0.25
+    });
+}
+
+function animate(){
+
+    ctx.clearRect(
+        0,
+        0,
+        canvas.width,
+        canvas.height
+    );
+
+    particles.forEach(p=>{
+
+        p.x+=p.vx;
+        p.y+=p.vy;
+
+        if(
+            p.x<0 ||
+            p.x>canvas.width
+        ){
+            p.vx*=-1;
+        }
+
+        if(
+            p.y<0 ||
+            p.y>canvas.height
+        ){
+            p.vy*=-1;
+        }
+
+        ctx.beginPath();
+        ctx.arc(
+            p.x,
+            p.y,
+            p.r,
+            0,
+            Math.PI*2
+        );
+
+        ctx.fillStyle=
+            "rgba(0,191,255,.35)";
+
+        ctx.fill();
+    });
+
+    requestAnimationFrame(
+        animate
+    );
+}
+
+animate();
+</script>
+
 </body>
 </html>
+```
